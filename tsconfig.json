@@ -1,0 +1,27 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+        "declaration": true,
+        "outDir": "dist",
+        "strict": true,
+        "lib": [
+            "ESNext",
+            "DOM"
+        ],
+        "target": "ESNext",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "allowSyntheticDefaultImports": true
+    },
+    "include": ["src/**/*"],
+  "exclude": [
+    "node_modules",
+    "**/*.stories.ts",
+    "**/*.stories.tsx", // <--- This targets your Storybook files
+    "vite.config.ts" // Consider excluding the config file if it's the source of the missing local module error
+  ]
+}
