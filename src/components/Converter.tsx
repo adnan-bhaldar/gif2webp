@@ -100,18 +100,19 @@ export function Converter({ file: { file, data, size } }: ConverterProps) {
 		useImageConversion(new Uint8Array(data));
 
 	const handleDownload = useCallback(() => {
-		if (convertedData) {
-			const blob = new Blob([convertedData], { type: "image/webp" });
-			const url = URL.createObjectURL(blob);
-			const a = document.createElement("a");
-			a.href = url;
-			a.download = file.name.replace(/\.[^/.]+$/, ".webp");
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-			URL.revokeObjectURL(url);
-		}
-	}, [convertedData, file.name]);
+    if (convertedData) {
+        const blob = new Blob([convertedData], { type: "image/webp" });
+        
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = file.name.replace(/\.[^/.]+$/, ".webp");
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+}, [convertedData, file.name]);
 
 	const renderContent = () => {
 		switch (status) {
