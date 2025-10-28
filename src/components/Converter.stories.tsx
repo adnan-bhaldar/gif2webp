@@ -1,7 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj, StoryContext } from '@storybook/react';
 import { Converter } from './Converter';
 import { mockSmallFile, mockMediumFile, mockLargeFile } from '../__mocks__/mockFiles';
 import { MockLanguageProvider } from '../__mocks__/mockContexts';
+
+// Define the type for the data returned by your loaders
+interface LoadedData {
+  mockFile: File;
+}
 
 const meta = {
   title: 'Conversion/Converter',
@@ -28,9 +33,11 @@ export const IdleState: Story = {
       mockFile: await mockSmallFile,
     }),
   ],
-  render: (args, { loaded: { mockFile } }) => (
-    <Converter {...args} file={mockFile} />
-  ),
+  // FIX: Cast 'loaded' object to 'LoadedData' to give 'mockFile' an explicit type.
+  render: (args, { loaded }) => {
+    const { mockFile } = loaded as LoadedData;
+    return <Converter {...args} file={mockFile} />;
+  },
   parameters: {
     docs: {
       description: {
@@ -47,10 +54,13 @@ export const IdleStateKorean: Story = {
       mockFile: await mockSmallFile,
     }),
   ],
-  render: (args, { loaded: { mockFile } }) => (
-    <Converter {...args} file={mockFile} />
-  ),
+  // FIX: Cast 'loaded' object to 'LoadedData'
+  render: (args, { loaded }) => {
+    const { mockFile } = loaded as LoadedData;
+    return <Converter {...args} file={mockFile} />;
+  },
   decorators: [
+    // The type for 'Story' here is inferred correctly by Storybook's Story type
     (Story) => (
       <MockLanguageProvider language="ko">
         <Story />
@@ -72,9 +82,11 @@ export const MediumFile: Story = {
       mockFile: await mockMediumFile,
     }),
   ],
-  render: (args, { loaded: { mockFile } }) => (
-    <Converter {...args} file={mockFile} />
-  ),
+  // FIX: Cast 'loaded' object to 'LoadedData'
+  render: (args, { loaded }) => {
+    const { mockFile } = loaded as LoadedData;
+    return <Converter {...args} file={mockFile} />;
+  },
   parameters: {
     docs: {
       description: {
@@ -90,9 +102,11 @@ export const LargeFile: Story = {
       mockFile: await mockLargeFile,
     }),
   ],
-  render: (args, { loaded: { mockFile } }) => (
-    <Converter {...args} file={mockFile} />
-  ),
+  // FIX: Cast 'loaded' object to 'LoadedData'
+  render: (args, { loaded }) => {
+    const { mockFile } = loaded as LoadedData;
+    return <Converter {...args} file={mockFile} />;
+  },
   parameters: {
     docs: {
       description: {
@@ -108,9 +122,11 @@ export const WithMemoryWarning: Story = {
       mockFile: await mockLargeFile,
     }),
   ],
-  render: (args, { loaded: { mockFile } }) => (
-    <Converter {...args} file={mockFile} />
-  ),
+  // FIX: Cast 'loaded' object to 'LoadedData'
+  render: (args, { loaded }) => {
+    const { mockFile } = loaded as LoadedData;
+    return <Converter {...args} file={mockFile} />;
+  },
   parameters: {
     docs: {
       description: {
@@ -127,10 +143,13 @@ export const WithMemoryWarningKorean: Story = {
       mockFile: await mockLargeFile,
     }),
   ],
-  render: (args, { loaded: { mockFile } }) => (
-    <Converter {...args} file={mockFile} />
-  ),
+  // FIX: Cast 'loaded' object to 'LoadedData'
+  render: (args, { loaded }) => {
+    const { mockFile } = loaded as LoadedData;
+    return <Converter {...args} file={mockFile} />;
+  },
   decorators: [
+    // The type for 'Story' here is inferred correctly by Storybook's Story type
     (Story) => (
       <MockLanguageProvider language="ko">
         <Story />
